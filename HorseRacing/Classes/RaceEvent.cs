@@ -10,17 +10,29 @@ namespace HorseRacing.Classes
     {
         public int RaceCount { get; set; }
         public List<Race> Races { get; set; }
+        public bool EventRegistration { get; set; }
 
         public RaceEvent(string eventName, string eventLocation, int raceCount) : base(eventName, eventLocation)
         {
             RaceCount = raceCount;
             Races = new List<Race>();
+            EventRegistration = true;
         }
 
 
         public void AddRace(Race race)
         {
-            if (race == null) throw new ArgumentException("Race cannot be null");
+
+            if (!EventRegistration)
+            {
+                Console.WriteLine("Registration is closed as race has already started");
+                return;
+            }
+
+            if (race == null)
+            {
+                throw new ArgumentException("Race cannot be null");
+            }
 
             foreach (var r in Races)
             {
@@ -32,6 +44,9 @@ namespace HorseRacing.Classes
             Races.Add(race);
             RaceCount = Races.Count;
         }
+
+
+       
 
         public override void displayDetails()
         {

@@ -11,6 +11,7 @@ namespace HorseRacing.Classes
         public string Name { get; set; }
         public DateTime StartTime { get; set; }
         public List<Horse> Horses { get; set; }
+        
 
         public Race(string name, DateTime startTime)
         {
