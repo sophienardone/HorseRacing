@@ -23,5 +23,22 @@ namespace HorseRacing.Classes
         {
             Horses.Add(horse);
         }
+
+        public void UploadHorses(List<Horse> horses)
+        {
+            foreach (var horse in horses)
+            {
+                AddHorse(horse);
+            }
+        }
+
+        public void DisplayDetailsFromRace()
+        {
+            Console.WriteLine($"Race: {Name}, Start Time: {StartTime}");
+            foreach (var horse in Horses)
+            {
+                Console.WriteLine($"Horse: {horse.Name}, Horse ID: {horse.HorseId}");
+            }
+        }
     }
 }

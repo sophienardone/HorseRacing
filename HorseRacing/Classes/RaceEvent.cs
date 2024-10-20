@@ -30,11 +30,7 @@ namespace HorseRacing.Classes
 
             foreach (var race in Races)
             {
-                Console.WriteLine($"Race Name: {race.Name}, Start Time: {race.StartTime}");
-                foreach (var horse in race.Horses)
-                {
-                    Console.WriteLine($"Horse Name: {horse.Name}, Horse ID: {horse.HorseId}");
-                }
+                race.DisplayDetailsFromRace();
             }
         }
     }
