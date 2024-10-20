@@ -20,17 +20,38 @@ namespace HorseRacing.Classes
 
         public void AddRace(Race race)
         {
+            if (race == null) throw new ArgumentException("Race cannot be null");
+
+            foreach (var r in Races)
+            {
+                if (r.Name == race.Name)
+                {
+                    throw new InvalidOperationException("Race already added to event");
+                }
+            }
             Races.Add(race);
             RaceCount = Races.Count;
         }
 
         public override void displayDetails()
         {
+
+            if(Races.Count == 0)
+            {
+                Console.WriteLine("No race results for this event");
+                return;
+            }
+
             Console.WriteLine($"Event: {eventName}, Location: {eventLocation}, Amount of Races: {RaceCount}");
 
             foreach (var race in Races)
             {
                 race.DisplayDetailsFromRace();
+
+                if(race.Horses.Count == 0)
+                {
+                    Console.WriteLine($"Race '{race.Name}' has no horses.");
+                }
             }
         }
     }

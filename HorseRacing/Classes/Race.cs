@@ -21,11 +21,27 @@ namespace HorseRacing.Classes
 
         public void AddHorse(Horse horse)
         {
+
+            if (horse == null) throw new ArgumentException("Horse cannot be null");
+
+            foreach (var h in Horses)
+            {
+                if(h.HorseId == horse.HorseId)
+                {
+                    throw new InvalidOperationException("Horse is already added to the race");
+                }
+            }
             Horses.Add(horse);
         }
 
         public void UploadHorses(List<Horse> horses)
         {
+
+            if(horses == null || horses.Count == 0)
+            {
+                throw new ArgumentException("Horse list cannot be null or empty");
+            }
+
             foreach (var horse in horses)
             {
                 AddHorse(horse);
