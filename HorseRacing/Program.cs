@@ -186,13 +186,7 @@ namespace HorseRacing
             selectedEvent.displayDetails();
         }
     }
-
-
-
-
-
-
 }
-}
+
 
 
