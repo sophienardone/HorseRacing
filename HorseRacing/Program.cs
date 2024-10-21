@@ -73,6 +73,45 @@ namespace HorseRacing
             raceEvents.Add(newEvent);
             Console.WriteLine("Event created");
         }
+
+        static void AddRaceToEvent(List<RaceEvent> raceEvents)
+        {
+            if (raceEvents.Count == 0)
+            {
+                Console.WriteLine("No events available, please create an event");
+                return;
+            }
+            Console.WriteLine("Available Events:");
+            for (int i = 0; i < raceEvents.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {raceEvents[i].eventName} - {raceEvents[i].eventLocation}");
+            }
+
+            Console.Write("Enter the number of the event to add a race: ");
+            if (!int.TryParse(Console.ReadLine(), out int eventIndex) || eventIndex < 1 || eventIndex > raceEvents.Count)
+            {
+                Console.WriteLine("Invalid event number");
+                return;
+            }
+
+            RaceEvent selectedEvent = raceEvents[eventIndex - 1];
+
+            Console.Write("Enter the name of the race: ");
+            string raceName = Console.ReadLine();
+
+            Console.Write("Enter the start time of the race");
+            if (!DateTime.TryParse(Console.ReadLine(), out DateTime startTime))
+            {
+                Console.WriteLine("Invalid date and time format, please use YYYY-MM-DD HH:MM");
+                return;
+            }
+
+            selectedEvent.AddRace(new Race(raceName, startTime));
+            Console.WriteLine("Race added successfully.");
+        }
+
+
+
     }
 }
 
