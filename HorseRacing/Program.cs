@@ -161,11 +161,38 @@ namespace HorseRacing
         }
 
 
+        static void DisplayEventDetails(List<RaceEvent> raceEvents)
+        {
+            if (raceEvents.Count == 0)
+            {
+                Console.WriteLine("No events available, please create an event first");
+                return;
+            }
 
+            Console.WriteLine("Available Events:");
+            for (int i = 0; i < raceEvents.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {raceEvents[i].eventName} - {raceEvents[i].eventLocation}");
+            }
 
+            Console.Write("Enter the number of the event to display details: ");
+            if (!int.TryParse(Console.ReadLine(), out int eventIndex) || eventIndex < 1 || eventIndex > raceEvents.Count)
+            {
+                Console.WriteLine("Invalid event number");
+                return;
+            }
 
-
+            RaceEvent selectedEvent = raceEvents[eventIndex - 1];
+            selectedEvent.displayDetails();
+        }
     }
+
+
+
+
+
+
+}
 }
 
 
