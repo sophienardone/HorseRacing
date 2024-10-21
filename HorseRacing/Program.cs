@@ -107,8 +107,61 @@ namespace HorseRacing
             }
 
             selectedEvent.AddRace(new Race(raceName, startTime));
-            Console.WriteLine("Race added successfully.");
+            Console.WriteLine("Race added");
         }
+
+
+        static void AddHorseToRace(List<RaceEvent> raceEvents)
+        {
+            if (raceEvents.Count == 0)
+            {
+                Console.WriteLine("No events available, please create an event first.");
+                return;
+            }
+
+            Console.WriteLine("Available Events:");
+            for (int i = 0; i < raceEvents.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {raceEvents[i].eventName} - {raceEvents[i].eventLocation}");
+            }
+
+            Console.Write("Enter the number of the event: ");
+            int eventIndex = int.Parse(Console.ReadLine()) - 1;
+            RaceEvent selectedEvent = raceEvents[eventIndex];
+
+            if (selectedEvent.Races.Count == 0)
+            {
+                Console.WriteLine("No races available in this event, please add a race");
+                return;
+            }
+
+            Console.WriteLine("Available Races in the Event:");
+            for (int i = 0; i < selectedEvent.Races.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {selectedEvent.Races[i].Name}");
+            }
+
+            Console.Write("Enter the number of the race: ");
+            int raceIndex = int.Parse(Console.ReadLine()) - 1;
+            Race selectedRace = selectedEvent.Races[raceIndex];
+
+            Console.Write("Enter the name of the horse: ");
+            string horseName = Console.ReadLine();
+
+            Console.Write("Enter the date of birth of the horse (YYYY-MM-DD): ");
+            DateTime horseDateOfBirth = DateTime.Parse(Console.ReadLine());
+
+            Console.Write("Enter the unique ID of the horse: ");
+            string horseId = Console.ReadLine();
+
+            Horse newHorse = new Horse(horseName, horseDateOfBirth, horseId);
+            selectedRace.AddHorse(newHorse);
+
+            Console.WriteLine("Horse added");
+        }
+
+
+
 
 
 
